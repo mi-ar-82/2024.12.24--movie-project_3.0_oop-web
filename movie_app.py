@@ -1,3 +1,6 @@
+import omdb
+from omdb_api_key import OMDB_API_KEY  # Import the API key from local file
+
 class MovieApp:
     #A class to manage the movie application, including user commands and menu handling.
 
@@ -9,6 +12,7 @@ class MovieApp:
             storage (IStorage): An instance of a class implementing IStorage.
         """
         self._storage = storage
+        omdb.set_default('apikey', OMDB_API_KEY)  # Use the imported API key
 
     def _command_list_movies(self):
         """
@@ -20,20 +24,37 @@ class MovieApp:
         else:
             for title, data in movies.items():
                 print(f"{title} ({data['year']}): {data['rating']}/10")
-
+    
     def _command_add_movie(self):
         """
-        Add a new movie to the storage.
+        Add a new movie by fetching details from the OMDb API.
         """
         try:
             title = input("Enter movie title: ").strip()
-            year = int(input("Enter release year: "))
-            rating = float(input("Enter rating (0-10): "))
-            poster = input("Enter poster URL: ").strip()
-            self._storage.add_movie(title, year, rating, poster)
-            print(f"Movie '{title}' added successfully.")
+            if not title:
+                raise ValueError("Title cannot be empty.")
+            
+            # Fetch movie details from OMDb API
+            movie_data = omdb.get(title = title)
+            
+            if not movie_data or 'title' not in movie_data:
+                print(f"Error: Movie '{title}' not found in OMDb database.")
+                return
+            
+            # Extract required fields
+            movie_title = movie_data.get('title')
+            year = int(movie_data.get('year', 0))
+            rating = float(movie_data.get('imdb_rating', 0)) if movie_data.get('imdb_rating') != 'N/A' else 0.0
+            poster = movie_data.get('poster', 'N/A')
+            
+            # Save to storage
+            self._storage.add_movie(movie_title, year, rating, poster)
+            print(f"Movie '{movie_title}' added successfully!")
+        
         except ValueError as e:
             print(f"Error: {e}")
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}")
 
     def _command_delete_movie(self):
         """

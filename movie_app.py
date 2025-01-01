@@ -1,6 +1,5 @@
-import os
 import omdb
-from omdb_api_key import OMDB_API_KEY  # Import the API key from local file
+from config.omdb_api_key import OMDB_API_KEY  # Import the API key from local file
 
 
 class MovieApp:

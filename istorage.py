@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 #This interface specifies the methods required for any storage mechanism. (json,csv, other)
 
+
 class IStorage(ABC):
     #Interface for storage classes. Defines CRUD operations.
 

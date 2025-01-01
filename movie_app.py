@@ -1,7 +1,6 @@
 class MovieApp:
     #A class to manage the movie application, including user commands and menu handling.
 
-
     def __init__(self, storage):
         """
         Initialize the MovieApp with a storage instance.

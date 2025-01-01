@@ -1,7 +1,6 @@
 import json
 from istorage import IStorage
 
-
 class StorageJson(IStorage):
     #This class will manage movies stored in a JSON file.
     #Implementation of IStorage for JSON files.

@@ -12,5 +12,6 @@ def main():
     app = MovieApp(storage)
     app.run()
 
+
 if __name__ == "__main__":
     main()

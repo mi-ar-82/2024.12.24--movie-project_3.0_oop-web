@@ -1,0 +1,12 @@
+.venv/
+.env/
+.idea/
+.git/
+.data/
+.testing/
+
+
+
+# Ignore configuration files containing sensitive information
+config/omdb_api_key.py
+

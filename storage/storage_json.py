@@ -1,5 +1,5 @@
 import json
-from istorage import IStorage
+from storage.istorage import IStorage
 
 class StorageJson(IStorage):
     #This class will manage movies stored in a JSON file.
@@ -42,11 +42,13 @@ class StorageJson(IStorage):
         if title in movies:
             del movies[title]
             self._save_movies(movies)
-
+    
     def update_movie(self, title, rating):
-        #Updates the rating of an existing movie in the storage.
-        #overrides method in iStorage !!!
+        """Updates the rating of an existing movie in the storage."""
         movies = self._load_movies()
         if title in movies:
             movies[title]["rating"] = rating
             self._save_movies(movies)
+        else:
+            raise ValueError(f"Movie '{title}' does not exist.")
+

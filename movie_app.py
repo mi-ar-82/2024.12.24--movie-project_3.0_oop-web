@@ -64,19 +64,25 @@ class MovieApp:
         title = input("Enter the title of the movie to delete: ").strip()
         self._storage.delete_movie(title)
         print(f"Movie '{title}' deleted (if it existed).")
-
+    
     def _command_update_movie(self):
-        """
-        Update a movie's rating in the storage.
-        """
+        """Update a movie's rating in the storage."""
         try:
             title = input("Enter the title of the movie to update: ").strip()
+            if not title:
+                raise ValueError("Title cannot be empty.")
+            
             rating = float(input("Enter new rating (0-10): "))
+            if not (0 <= rating <= 10):
+                raise ValueError("Rating must be between 0 and 10.")
+            
             self._storage.update_movie(title, rating)
             print(f"Movie '{title}' updated successfully.")
         except ValueError as e:
             print(f"Error: {e}")
-
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}")
+    
     def _command_statistics(self):
         """
         Display statistics about the movies in storage.

@@ -103,5 +103,7 @@ class StorageCsv(IStorage):
         """
         movies = self._load_movies()
         if title in movies:
-            movies[title]['rating'] = rating
+            movies[title]["rating"] = rating
             self._save_movies(movies)
+        else:
+            raise ValueError(f"Movie '{title}' does not exist.")

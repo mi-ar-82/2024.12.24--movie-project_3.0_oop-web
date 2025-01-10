@@ -28,9 +28,9 @@ Install all required Python packages listed in requirements.txt:
    
    
 4. Add Your OMDb API Key
-Create a file named omdb_api_key.py in the config/ directory and add your OMDb API key:
+Create a file named .env in the root directory and add your OMDb API key:
     ```python
-    # config/omdb_api_key.py
+    # .env
     OMDB_API_KEY = "your_actual_api_key_here"
 
 5. Run the Application

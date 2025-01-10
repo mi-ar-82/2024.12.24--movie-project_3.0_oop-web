@@ -1,6 +1,12 @@
 import omdb
-from config.omdb_api_key import OMDB_API_KEY  # Import the API key from local file
+import os
+from dotenv import load_dotenv
 
+
+# Load environment variables from the .env file
+load_dotenv()
+# Access the OMDb API key
+OMDB_API_KEY = os.getenv("OMDB_API_KEY")
 
 class MovieApp:
     #A class to manage the movie application, including user commands and menu handling.

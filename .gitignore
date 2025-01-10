@@ -5,6 +5,7 @@
 .data/
 .testing/
 
+.env
 
 
 # Ignore configuration files containing sensitive information
